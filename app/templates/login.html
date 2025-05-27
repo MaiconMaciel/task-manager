@@ -1,0 +1,60 @@
+<html lang="PT-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager Login</title>
+    <link rel="icon" href="../static/icon.png" type="image/png">
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    
+</body>
+</html>
+
+<body>
+    <header>
+        <img src="./static/icon.png" id="logo"/>
+        <a href="{{ url_for('auth.login') }}" class="login-btn"> Login / Registro</a> <!-- quando escrever o email - checar se tem conta e desabilitar registro -->
+    </header>
+
+    <main>
+
+            
+
+
+        <div class="home-login login-form">
+        <h1>Task Manager</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flashes">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+        <form method="POST" action="/login">
+        <label for="email">E-mail</label>
+          <input type="email" name="email" placeholder="Usuário">
+          <label for="password">Senha</label>
+          <input type="password" name="password" placeholder="Senha">
+          <button name ="btn-login" type="submit" class="frm-login-btn">Entrar</button>
+          <button name="btn-registrar" type="submit" class="frm-register-btn">Registrar</button>
+        </form>
+        </div>
+    </main>
+    <footer>
+        <h1>Task Manager by Maicon Maciel</h1>
+        <div>
+            <a href="">Linkedin</a>
+            <a href="">Github</a>
+            <a href="">Email</a>
+        </div>
+    </footer>
+</body>
+</html>
+<script>
+document.getElementById('logout-btn').addEventListener('click', function() {
+    window.location.href = "{{ url_for('auth.logout') }}";
+});
+</script>

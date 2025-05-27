@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 2rem;
+  background: #f5f5f5;
+  color: #333;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+#logo {
+  max-width: 7vh;
+}
+
+h1 {
+  margin: 0;
+}
+button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+.logout-btn-task {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: #fc4040;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn-task:hover {
+  background-color: #970000;
+}
+
+
+
+
+ul#task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul#task-list li {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.task-left {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.task-left input[type="checkbox"] {
+  margin-right: 1rem;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+.task-text {
+  flex-grow: 1;
+}
+.task-actions button {
+  margin-left: 0.5rem;
+  background-color: #6c757d;
+}
+.task-actions button.delete {
+  background-color: #dc3545;
+}
+.task-actions button:hover {
+  opacity: 0.9;
+}
+.task-text.completed {
+  text-decoration: line-through;
+  color: #888;
+}
