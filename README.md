@@ -63,3 +63,5 @@ Contribuição
 Contribuições são bem-vindas!
 Esse é meu primeiro projeto de larga escala, a junção de diversas bibliotecas, funções e arquivos foram um desafio e tanto, mas persistência é tudo.
 Faça um fork do projeto, crie sua branch, faça as alterações e envie um pull request.
+
+Linkedin: https://www.linkedin.com/in/maiconmaciel
