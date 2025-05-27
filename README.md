@@ -24,20 +24,20 @@ Tecnologias Utilizadas
 
 Instalação
 
-    Clone o repositório:
+Clone o repositório:
 
-git clone https://github.com/MaiconMaciel/task-manager
-cd task-manager
+    git clone https://github.com/MaiconMaciel/task-manager
+    cd task-manager
 
 Crie e ative um ambiente virtual (recomendado):
 
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+    python -m venv venv
+    source venv/bin/activate  # Linux/Mac
+    venv\Scripts\activate     # Windows
 
 Instale as dependências:
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 Configure o banco de dados MySQL:
 
