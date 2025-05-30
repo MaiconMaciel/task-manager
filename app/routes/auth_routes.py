@@ -6,40 +6,42 @@ from app import db
 
 bp = Blueprint('auth', __name__)
 
+
 @bp.route('/login', methods=['GET', 'POST'], endpoint='login')
 def login():
     from app.models.user import User
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        if email and password:
+            # Identificar qual botão foi clicado
+            if 'btn-login' in request.form:
+                # Login
+                user = User.query.filter_by(email=email).first()
+                if user and check_password_hash(user.password, password):
+                    login_user(user)
+                    return redirect(url_for('tasks.tasks_view'))
+                else:
+                    flash('Email ou senha incorretos.')
+                    return redirect(url_for('auth.login'))
 
-        # Identificar qual botão foi clicado
-        if 'btn-login' in request.form:
-            # Login
-            user = User.query.filter_by(email=email).first()
-            if user and check_password_hash(user.password, password):
-                login_user(user)
-                return redirect(url_for('tasks.tasks_view'))
-            else:
-                flash('Email ou senha incorretos.')
+            elif 'btn-registrar' in request.form:
+                # Registro
+                user = User.query.filter_by(email=email).first()
+                if user:
+                    flash('Usuário já existe. Faça login.')
+                    return redirect(url_for('auth.login'))
+
+                new_user = User(email=email, password=generate_password_hash(password))
+                db.session.add(new_user)
+                db.session.commit()
+                flash('Registrado com sucesso! Faça login agora.')
                 return redirect(url_for('auth.login'))
-
-        elif 'btn-registrar' in request.form:
-            # Registro
-            user = User.query.filter_by(email=email).first()
-            if user:
-                flash('Usuário já existe. Faça login.')
-                return redirect(url_for('auth.login'))
-
-            new_user = User(email=email, password=generate_password_hash(password))
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Registrado com sucesso! Faça login agora.')
-            return redirect(url_for('auth.login'))
+        else:
+            flash('Preencha corretamente os campos')
 
     # GET request
     return render_template('login.html')
-
 
 
 @bp.route('/logout')

@@ -13,11 +13,18 @@
 
 <body>
     <header>
-        <a href="{{ url_for('main.home') }}"><img src="./static/icon.png" id="logo"/></a>
-        <a href="{{ url_for('auth.login') }}" class="login-btn"> Login / Registro</a> <!-- quando escrever o email - checar se tem conta e desabilitar registro -->
+        <div class="h-left">
+            <a href="{{ url_for('main.home') }}"><img src="./static/icon.png" id="logo"/></a>
+            <h2>Task Manager</h2>
+        </div>
+        
+        <a href="{{ url_for('auth.login') }}" class="login-btn"> Login | Registro</a>
     </header>
+    <main>
+    <!--
+    <div class="main-holder"></div>
+    <!--Modal do login | não está sendo utilizado na home somente no /login
     <main style="display: none;">
-        <h1>AQUI A HOMEPAGE</h1>
         <div class="home-login login-form">
         <h1>Task Manager</h1>
         <form method="POST" action="/login">
@@ -29,13 +36,37 @@
           <button type="submit" class="frm-register-btn">Registrar</button>
         </form>
         </div>
+
+    -->
+        <!-- TESTE DE HOME COM CONTENT-->
+         <div class="tech">
+            <h2>Este projeto foi desenvolvido com foco no aprendizado e nas boas práticas de desenvolvimento web, utilizando:</h2>
+
+            <h3>Flask (Python): Framework web leve e poderoso, que organiza toda a estrutura da aplicação.</h3>
+            <h3>MySQL: Banco de dados relacional onde ficam armazenadas as informações dos usuários e tarefas.</h3>
+            <h3>SQLAlchemy: ORM (Object-Relational Mapper) que facilita a comunicação com o banco de dados através de objetos Python.</h3>
+            <h3>Flask-Login: Biblioteca usada para autenticação de usuários e gerenciamento de sessões com segurança.</h3>
+            <h3>Jinja2: Template engine do Flask, responsável por exibir as informações de forma dinâmica nas páginas HTML.</h3>
+            <h3>HTML e CSS personalizados: Para uma interface clara, responsiva e funcional.</h3>
+            <h3>Javascript</h3>
+            <ul>
+                <li>Atualiza o DOM dinamicamente (por exemplo, ao adicionar ou remover uma tarefa);</li>
+                <li>Realiza requisições HTTP assíncronas (AJAX) para a API do Flask usando fetch, melhorando a fluidez da experiência do usuário;</li>
+                <li>Manipula eventos de forma interativa (ex: cliques, envio de formulários, etc).</li>
+            </ul>
+         </div>
+        
     </main>
     <footer>
-        <h1>Task Manager by Maicon Maciel</h1>
-        <div>
-            <a href="">Linkedin</a>
-            <a href="">Github</a>
-            <a href="">Email</a>
+        <div class="f-left">
+            <h1>Task Manager by:</h1>
+            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank">Maicon Maciel</a>
+        </div>
+        
+        <div class="f-right">
+            <a class="f-links links" href="https://www.linkedin.com/in/maiconmaciel/" target="_blank">Linkedin</a>
+            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank"">Github</a>
+            <a class="f-links links" href="mailto:maicon.costa1331@gmail.com">Email</a>
         </div>
     </footer>
 </body>

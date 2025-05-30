@@ -21,7 +21,7 @@
     </div>
   </header>
 
-
+  <main>
 <!--Molde tarefas-->
   <ul id="task-list">
     {% for task in tasks %}
@@ -35,8 +35,7 @@
         <button class="delete">Remover</button>
       </div>
     </li>
-    {% else %}
-    <li id="default-li">Nenhuma tarefa encontrada.</li>
+    <li id="default-li" {% if tasks %}style="display:none"{% endif %}>Nenhuma tarefa encontrada.</li>
     {% endfor %}
   </ul>
 
@@ -52,14 +51,30 @@
         <input type="text" id="task-input" placeholder="Descrição da tarefa" required
           style="width:100%; padding:0.5rem; font-size:1rem; margin-bottom:1rem;"/>
         <button type="submit">Salvar</button>
-        <button type="button" id="cancel-btn" style="margin-left:1rem; background:#6c757d;">Cancelar</button>
+        <button type="button" id="cancel-btn">Cancelar</button>
       </form>
     </div>
   </div>
+  </main>
+
+
+
+      <footer>
+        <div class="f-left">
+            <h1>Task Manager by:</h1>
+            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank">Maicon Maciel</a>
+        </div>
+        
+        <div class="f-right">
+            <a class="f-links links" href="https://www.linkedin.com/in/maiconmaciel/" target="_blank">Linkedin</a>
+            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank"">Github</a>
+            <a class="f-links links" href="mailto:maicon.costa1331@gmail.com">Email</a>
+        </div>
+    </footer>
 
 </body>
 <script>
-  const addTaskBtn = document.getElementById("add-task-btn");
+    const addTaskBtn = document.getElementById("add-task-btn");
     const modal = document.getElementById("task-modal");
     const cancelBtn = document.getElementById("cancel-btn");
     const taskForm = document.getElementById("task-form");

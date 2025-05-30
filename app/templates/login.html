@@ -13,15 +13,19 @@
 
 <body>
     <header>
-        <img src="./static/icon.png" id="logo"/>
-        <a href="{{ url_for('auth.login') }}" class="login-btn"> Login / Registro</a> <!-- quando escrever o email - checar se tem conta e desabilitar registro -->
+        <div class="h-left">
+            <a href="{{ url_for('main.home') }}"><img src="./static/icon.png" id="logo"/></a>
+            <h2>Task Manager</h2>
+        </div>
+        
+        <a href="{{ url_for('auth.login') }}" class="login-btn"> Login | Registro</a>
     </header>
 
     <main>
 
             
 
-
+        <!-- Modal do login, esse está sim sendo usado -->
         <div class="home-login login-form">
         <h1>Task Manager</h1>
         {% with messages = get_flashed_messages() %}
@@ -35,20 +39,24 @@
             {% endwith %}
         <form method="POST" action="/login">
         <label for="email">E-mail</label>
-          <input type="email" name="email" placeholder="Usuário">
+          <input type="email" name="email" placeholder="Usuário" required>
           <label for="password">Senha</label>
-          <input type="password" name="password" placeholder="Senha">
+          <input type="password" name="password" placeholder="Senha" required>
           <button name ="btn-login" type="submit" class="frm-login-btn">Entrar</button>
           <button name="btn-registrar" type="submit" class="frm-register-btn">Registrar</button>
         </form>
         </div>
     </main>
     <footer>
-        <h1>Task Manager by Maicon Maciel</h1>
-        <div>
-            <a href="">Linkedin</a>
-            <a href="">Github</a>
-            <a href="">Email</a>
+        <div class="f-left">
+            <h1>Task Manager by:</h1>
+            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank">Maicon Maciel</a>
+        </div>
+        
+        <div class="f-right">
+            <a class="f-links links" href="https://www.linkedin.com/in/maiconmaciel/" target="_blank">Linkedin</a>
+            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank"">Github</a>
+            <a class="f-links links" href="mailto:maicon.costa1331@gmail.com">Email</a>
         </div>
     </footer>
 </body>

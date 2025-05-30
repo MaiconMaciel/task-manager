@@ -1,15 +1,33 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 2rem;
-  background: #f5f5f5;
-  color: #333;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #222222;
 }
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  height: 12vh;
+  border-bottom: 2px solid #222222;
+  margin-bottom: 2vh;
 }
+header div {
+  margin-inline: 10vw;
+  padding-inline: 1rem;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: rgb(235, 235, 235);
+  color: #333;
+}
+main {
+  min-height: 100vh;
+  margin-inline: 10vw;
+}
+
 #logo {
   max-width: 7vh;
 }
@@ -21,27 +39,24 @@ button {
   padding: 0.5rem 1rem;
   cursor: pointer;
   border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  background-color: #FFFFFF;
+  color: #222222;
+  transition: all 0.2s ease;
+  border: 2px solid #222222;
 }
 button:hover {
-  background-color: #0056b3;
+  background-color: #a1a1a1;
 }
 
 .logout-btn-task {
   padding: 0.5rem 1rem;
-  cursor: pointer;
-  border: none;
-  background-color: #fc4040;
+  background-color: #dc3545;
   color: white;
-  border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
 .logout-btn-task:hover {
-  background-color: #970000;
+  background-color: #ff0000;
 }
 
 
@@ -54,9 +69,9 @@ ul#task-list {
 }
 ul#task-list li {
   background: white;
+  border: 2px solid #8d8d8d;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,6 +96,7 @@ ul#task-list li {
 }
 .task-actions button.delete {
   background-color: #dc3545;
+  color: #FFFFFF;
 }
 .task-actions button:hover {
   opacity: 0.9;
@@ -89,3 +105,54 @@ ul#task-list li {
   text-decoration: line-through;
   color: #888;
 }
+
+
+/*todo o footer*/
+footer {
+  min-height: 15vh;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+
+  border-top: 2px solid #222222;
+
+
+  display: flex;
+  justify-content: space-between;
+  padding: 3vh
+
+}
+
+footer div {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 3vh
+}
+
+footer div a {
+  padding: 5px;
+}
+.links:hover {
+  color: #808080;
+  text-decoration: underline;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.f-left {
+  text-align: left;
+}
+.f-right {
+  text-align: right;
+}
+
+/*para manter o footer fora da visão na homepage*/
+.main-holder {
+  height: 100vh;
+}
+
+
+
