@@ -1,234 +1,105 @@
-<html lang="PT-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager Homepage</title>
-    <link rel="icon" href="../static/icon.png" type="image/png">
-    <link rel="stylesheet" href="../static/task-style.css">
-    <script src="../static/task-scirpts.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Manager</title>
+
+  <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='task-style.css') }}">
+
+  <!-- JS externo (RECOMENDADO) -->
+  <script src="{{ url_for('static', filename='task-scripts.js') }}" defer></script>
 </head>
+
 <body>
 
+  <!-- HEADER -->
   <header>
-    <div style="display: flex; align-items: center; padding: 10px 5px;">
-      <a href="{{ url_for('main.home') }}"><img src="./static/icon.png" id="logo"/></a>
-      <h1 style="padding-inline: 3rem;">Minhas Tarefas</h1>
+    <div class="header-left">
+      <a href="{{ url_for('main.home') }}">
+        <img src="{{ url_for('static', filename='icon.png') }}" id="logo" alt="Logo">
+      </a>
+      <h1>Minhas Tarefas</h1>
     </div>
-    
-    <div>
+
+    <div class="header-right">
       <button id="add-task-btn">Adicionar Tarefa</button>
       <button id="logout-btn" class="logout-btn-task">Deslogar</button>
     </div>
   </header>
 
+  <!-- MAIN -->
   <main>
-<!--Molde tarefas-->
-  <ul id="task-list">
-    {% for task in tasks %}
-    <li>
-      <div class="task-left">
-        <input type="checkbox" data-id="{{ task.id }}" {% if task.done %}checked{% endif %} />
-        <span class="task-text {% if task.done %}completed{% endif %}">{{ task.title }}</span>
-      </div>
-      <div class="task-actions">
-        <button class="edit">Editar</button>
-        <button class="delete">Remover</button>
-      </div>
-    </li>
-    <li id="default-li" {% if tasks %}style="display:none"{% endif %}>Nenhuma tarefa encontrada.</li>
-    {% endfor %}
-  </ul>
 
+    <!-- LISTA DE TAREFAS -->
+    <ul id="task-list">
 
-
-  <!--Molde das tasks e editar-->
-  <div id="task-modal" style="display:none; position:fixed; top:0; left:0; 
-      width:100%; height:100%; background: rgba(0,0,0,0.5); 
-      justify-content:center; align-items:center;">
-    <div style="background:white; padding:1rem 1.5rem; border-radius:8px; max-width:400px; width:90%;">
-      <h2 id="modal-title">Nova Tarefa</h2>
-      <form id="task-form">
-        <input type="text" id="task-input" placeholder="Descrição da tarefa" required
-          style="width:100%; padding:0.5rem; font-size:1rem; margin-bottom:1rem;"/>
-        <button type="submit">Salvar</button>
-        <button type="button" id="cancel-btn">Cancelar</button>
-      </form>
-    </div>
-  </div>
-  </main>
-
-
-
-      <footer>
-        <div class="f-left">
-            <h1>Task Manager by:</h1>
-            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank">Maicon Maciel</a>
-        </div>
-        
-        <div class="f-right">
-            <a class="f-links links" href="https://www.linkedin.com/in/maiconmaciel/" target="_blank">Linkedin</a>
-            <a class="f-links links" href="https://github.com/MaiconMaciel" target="_blank"">Github</a>
-            <a class="f-links links" href="mailto:maicon.costa1331@gmail.com">Email</a>
-        </div>
-    </footer>
-
-</body>
-<script>
-    const addTaskBtn = document.getElementById("add-task-btn");
-    const modal = document.getElementById("task-modal");
-    const cancelBtn = document.getElementById("cancel-btn");
-    const taskForm = document.getElementById("task-form");
-    const taskInput = document.getElementById("task-input");
-    const modalTitle = document.getElementById("modal-title");
-    const taskList = document.getElementById("task-list");
-    const defaultLi = document.getElementById("default-li");
-
-    let editTaskElement = null;
-
-addTaskBtn.addEventListener("click", () => {
-  modalTitle.textContent = "Nova Tarefa";
-  taskInput.value = "";
-  modal.style.display = "flex";
-  editTaskElement = null;
-  taskInput.focus();
-});
-
-// event listener do botao editar
-taskList.addEventListener("click", (e) => {
-  if (e.target.classList.contains("edit")) {
-    const li = e.target.closest("li");
-    const taskText = li.querySelector(".task-text");
-    const taskId = li.querySelector("input[type='checkbox']").dataset.id;
-
-    
-    taskInput.value = taskText.textContent;
-    modalTitle.textContent = "Editar Tarefa";
-    modal.style.display = "flex";
-    taskInput.focus();
-
-    
-    editTaskElement = {
-      li,
-      taskText,
-      taskId
-    };
-  }
-});
-
-
-// remover
-taskList.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("delete")) {
-    const li = e.target.closest("li");
-    const checkbox = li.querySelector("input[type='checkbox']");
-    const taskId = checkbox.dataset.id;
-
-    if (!confirm("Tem certeza que deseja remover esta tarefa?")) return;
-
-    try {
-      const response = await fetch(`/api/tasks/${taskId}`, {
-        method: 'DELETE'
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        li.remove();
-      } else {
-        console.error("Erro ao remover tarefa:", data);
-      }
-    } catch (err) {
-      console.error("Erro de rede ao remover tarefa:", err);
-    }
-  }
-});
-
-
- taskForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const value = taskInput.value.trim();
-  if (!value) return;
-
-  if (editTaskElement) {
-    // Atualizar no servidor
-    const response = await fetch(`/api/tasks/${editTaskElement.taskId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ title: value })
-    });
-
-    if (response.ok) {
-      // Atualiza visualmente
-      editTaskElement.taskText.textContent = value;
-      modal.style.display = "none";
-      taskInput.value = "";
-      editTaskElement = null;
-    } else {
-      console.error("Erro ao editar tarefa.");
-    }
-  } else {
-    // Criar nova tarefa
-    const response = await fetch("/api/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ title: value })
-    });
-
-    if (response.ok) {
-      const newTask = await response.json();
-      const li = document.createElement("li");
-      defaultLi.style.display = "none"
-      li.innerHTML = `
+      {% for task in tasks %}
+      <li>
         <div class="task-left">
-          <input type="checkbox" data-id="${newTask.id}" ${newTask.done ? "checked" : ""} />
-          <span class="task-text ${newTask.done ? "completed" : ""}">${newTask.title}</span>
+          <input
+            type="checkbox"
+            data-id="{{ task.id }}"
+            {% if task.done %}checked{% endif %}
+          />
+          <span class="task-text {% if task.done %}completed{% endif %}">
+            {{ task.title }}
+          </span>
         </div>
+
         <div class="task-actions">
           <button class="edit">Editar</button>
           <button class="delete">Remover</button>
         </div>
-      `;
-      taskList.appendChild(li);
-      modal.style.display = "none";
-      taskInput.value = "";
-    } else {
-      console.error("Erro ao criar tarefa.");
-    }
-  }
-});
+      </li>
+      {% endfor %}
 
+      <!-- Mensagem padrão (FORA do loop – BUG CORRIGIDO) -->
+      <li id="default-li" {% if tasks %}style="display:none"{% endif %}>
+        Nenhuma tarefa encontrada.
+      </li>
 
+    </ul>
 
+    <!-- MODAL -->
+    <div id="task-modal" class="modal" d>
+      <div class="modal-content">
 
+        <h2 id="modal-title">Nova Tarefa</h2>
 
+        <form id="task-form">
+          <input
+            type="text"
+            id="task-input"
+            placeholder="Descrição da tarefa"
+            required
+          />
 
-    // Atualiza visual quando checkbox é clicado
-    taskList.addEventListener("change", (e) => {
-      if (e.target.type === "checkbox") {
-        const taskText = e.target.closest("li").querySelector(".task-text");
-        if (e.target.checked) {
-          taskText.classList.add("completed");
-        } else {
-          taskText.classList.remove("completed");
-        }
-      }
-    });
+          <div class="modal-actions">
+            <button type="submit">Salvar</button>
+            <button type="button" id="cancel-btn">Cancelar</button>
+          </div>
+        </form>
 
-    //Fechar modal se apertar para cancelar
-    cancelBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-          modal.style.display = "none";
-    })
+      </div>
+    </div>
 
+  </main>
 
+  <!-- FOOTER -->
+  <footer>
+    <div class="f-left">
+      <h2>Task Manager by:</h2>
+      <a href="https://github.com/MaiconMaciel" target="_blank">Maicon Maciel</a>
+    </div>
 
-    document.getElementById('logout-btn').addEventListener('click', function() {
-    window.location.href = "{{ url_for('auth.logout') }}";
-});
+    <div class="f-right">
+      <a href="https://www.linkedin.com/in/maiconmaciel/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/MaiconMaciel" target="_blank">GitHub</a>
+      <a href="mailto:maicon.costa1331@gmail.com">Email</a>
+    </div>
+  </footer>
 
-
-</script>
+</body>
 </html>

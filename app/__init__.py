@@ -8,13 +8,13 @@ import os
 
 load_dotenv()  # carrega arquivo .env
 secret_key = os.getenv('SECRET_KEY')
-
+db_conn = os.getenv('DB_CONN')
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__) #chamar function do app_config_local
 
     app.config['SECRET_KEY'] = secret_key
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:password@localhost:3306/taskdb' # configure sua db
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_conn # configure sua db
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
