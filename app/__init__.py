@@ -7,14 +7,14 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()  # carrega arquivo .env
-secret_key = os.getenv('SECRET_KEY')
-db_conn = os.getenv('DB_CONN')
+secret_key = os.getenv('SECRET_KEY') #crie uma key e a coloque em um .env: python -c "import secrets; print(secrets.token_hex(32))"
+db_conn = os.getenv('DB_CONN') #no .env crie sua string de conexão com o mySQL: 'mysql+pymysql://user:senha@localhost:3306/schema'
 
 def create_app():
-    app = Flask(__name__) #chamar function do app_config_local
+    app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = secret_key
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_conn # configure sua db
+    app.config['SECRET_KEY'] = secret_key # .env 
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_conn # .env
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

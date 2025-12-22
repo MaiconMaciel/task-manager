@@ -5,6 +5,8 @@
     <title>Task Manager Login</title>
     <link rel="icon" href="../static/icon.png" type="image/png">
     <link rel="stylesheet" href="./static/style.css">
+
+    
 </head>
 <body>
     
@@ -22,10 +24,6 @@
     </header>
 
     <main>
-
-            
-
-        <!-- Modal do login, esse está sim sendo usado -->
         <div class="home-login login-form">
         <h1>Task Manager</h1>
         {% with messages = get_flashed_messages() %}
@@ -59,10 +57,7 @@
             <a class="f-links links" href="mailto:maicon.costa1331@gmail.com">Email</a>
         </div>
     </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>     
 </body>
 </html>
-<script>
-document.getElementById('logout-btn').addEventListener('click', function() {
-    window.location.href = "{{ url_for('auth.logout') }}";
-});
-</script>

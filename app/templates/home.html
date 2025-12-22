@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager Homepage</title>
-    <link rel="icon" href="../static/icon.png" type="image/png">
-    <link rel="stylesheet" href="./static/style.css">
+    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     
@@ -21,24 +21,7 @@
         <a href="{{ url_for('auth.login') }}" class="login-btn"> Login | Registro</a>
     </header>
     <main>
-    <!--
-    <div class="main-holder"></div>
-    <!--Modal do login | não está sendo utilizado na home somente no /login
-    <main style="display: none;">
-        <div class="home-login login-form">
-        <h1>Task Manager</h1>
-        <form method="POST" action="/login">
-        <label for="email">E-mail</label>
-          <input type="email" name="email" placeholder="Usuário">
-          <label for="password">Senha</label>
-          <input type="password" name="password" placeholder="Senha">
-          <button type="submit" class="frm-login-btn">Entrar</button>
-          <button type="submit" class="frm-register-btn">Registrar</button>
-        </form>
-        </div>
 
-    -->
-        <!-- TESTE DE HOME COM CONTENT-->
          <div class="tech">
             <h2>Este projeto foi desenvolvido com foco no aprendizado e nas boas práticas de desenvolvimento web, utilizando:</h2>
 
