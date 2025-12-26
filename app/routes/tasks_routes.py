@@ -1,4 +1,4 @@
-# rota para toda a funcionalidade das tasks
+# toda a funcionalidade das tarefas (CRUD)
 
 
 from flask import request, jsonify, Blueprint, render_template
@@ -24,7 +24,7 @@ def create_task():
 
     return jsonify({
         'id': task.id,
-        'title': task.title,
+        'title': task.title, # TITLE SE REFERE AO TITULO DA TAREFA EX. GRAVAR DEMONSTRAÇÂO KUMULUS
         'done': task.done
     }), 201
 
@@ -35,7 +35,7 @@ def tasks_view():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     return render_template('tasks.html', tasks=tasks)
 
-
+# STATUS
 @bp.route('/tasks/<int:task_id>/toggle', methods=['POST'])
 @login_required
 def toggle_task(task_id):
@@ -51,8 +51,7 @@ def toggle_task(task_id):
     db.session.commit()
     return jsonify(success=True, done=task.done)
 
-# remocao
-
+# REMOVER
 
 @bp.route('/api/tasks/<int:task_id>', methods=['DELETE'])
 @login_required
@@ -68,7 +67,7 @@ def delete_task(task_id):
     return jsonify({'success': True})
 
 
-# rota de editar a task
+# EDITAR
 
 @bp.route('/api/tasks/<int:task_id>', methods=['PUT'])
 @login_required

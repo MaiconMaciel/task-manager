@@ -8,7 +8,7 @@ import os
 
 load_dotenv()  # carrega arquivo .env
 secret_key = os.getenv('SECRET_KEY') #crie uma key e a coloque em um .env: python -c "import secrets; print(secrets.token_hex(32))"
-db_conn = os.getenv('DB_CONN') #no .env crie sua string de conexão com o mySQL: 'mysql+pymysql://user:senha@localhost:3306/schema'
+db_conn = os.getenv('DB_CONN') #no .env crie sua string de conexão com o mySQL: 'mysql+pymysql://user:password@localhost:3306/schema-name'
 
 def create_app():
     app = Flask(__name__)

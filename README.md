@@ -1,67 +1,115 @@
-Sistema de Gerenciamento de Tarefas com Flask e MySQL
+# 📝 Task Manager App
 
+> Uma aplicação Fullstack robusta para gerenciamento de tarefas, desenvolvida com foco em arquitetura MVC, segurança e experiência do usuário (UX).
 
-Projeto web full-stack para gerenciar tarefas pessoais, desenvolvido com Flask no backend e MySQL como banco de dados.
-Permite aos usuários registrar-se, fazer login, criar, editar, concluir e excluir tarefas, com segurança e controle de acesso. A interface é simples, responsiva e interativa, usando JavaScript para comunicação assíncrona com o backend.
+![Badge em Desenvolvimento](https://img.shields.io/badge/Status-Concluído-green)
+![Python Version](https://img.shields.io/badge/Python-3.x-blue)
+![Flask Version](https://img.shields.io/badge/Flask-3.1.1-lightgrey)
 
-Funcionalidades
+## Sobre o Projeto
 
-    Cadastro e autenticação de usuários (com Flask-Login)
-    CRUD (Create, Read, Update, Delete) completo para tarefas
-    Marcar tarefas como concluídas ou pendentes
-    Interface amigável e responsiva
-    Validação e tratamento de erros no frontend e backend
-    Requisições assíncronas com fetch API para melhor UX
+Este projeto consiste em um sistema completo de gerenciamento de tarefas (To-Do List). O objetivo principal não foi apenas criar um CRUD, mas sim estruturar uma aplicação escalável que integrasse um **Backend sólido em Python (Flask)** com um **Frontend dinâmico e responsivo**.
 
-Tecnologias Utilizadas
+Diferente de abordagens tradicionais que recarregam a página a cada ação, este projeto utiliza **JavaScript Puro (Vanilla JS) e Fetch API** para comunicação assíncrona, garantindo que a interface seja fluida e moderna.
 
-    Python 3.x
-    Flask
-    Flask-Login
-    SQLAlchemy
-    MySQL (via PyMySQL)
-    HTML, CSS, JavaScript (fetch API)
+### Destaques Técnicos
+* **Arquitetura Modular:** Utilização de **Flask Blueprints** para separar rotas de autenticação (`auth_routes`) e lógica de negócios (`tasks_routes`), facilitando a manutenção.
+* **ORM & Database:** Integração com **MySQL** via **SQLAlchemy**, garantindo modelagem de dados eficiente e prevenção contra SQL Injection.
+* **Segurança:** Gerenciamento de sessões com **Flask-Login** e proteção de credenciais sensíveis via variáveis de ambiente (`python-dotenv`).
+* **Frontend Async:** Manipulação do DOM e requisições HTTP via `fetch`, proporcionando uma experiência de usuário (UX) sem "flicker" (recarregamento de página).
 
-Instalação
+---
 
-Clone o repositório:
+## Tecnologias Utilizadas
 
-    git clone https://github.com/MaiconMaciel/task-manager
-    cd task-manager
+**Backend**
+* **Python 3**
+* **Flask 3.1.1** (Framework Web)
+* **Flask-Login** (Gestão de Sessões/Auth)
+* **SQLAlchemy & PyMySQL** (ORM e Driver MySQL)
+* **Werkzeug** (Segurança e Hash de senhas)
+* **Python-Dotenv** (Gerenciamento de variáveis de ambiente)
 
-Crie e ative um ambiente virtual (recomendado):
+**Frontend**
+* **HTML5 & CSS3** (Design Responsivo)
+* **JavaScript (ES6+)** (Fetch API, Manipulação de DOM)
+* **Jinja2** (Template Engine)
 
-    python -m venv venv
-    source venv/bin/activate  # Linux/Mac
-    venv\Scripts\activate     # Windows
+---
 
-Instale as dependências:
+## Instalação e Configuração
 
-    pip install -r requirements.txt
+Siga os passos abaixo para rodar o projeto localmente.
 
-Configure o banco de dados MySQL:
+### 1. Clone o repositório
+```bash
+git clone [https://github.com/MaiconMaciel/task-manager](https://github.com/MaiconMaciel/task-manager)
+cd task-manager
+```
 
-    Crie um banco de dados no MySQL (exemplo: tasks_db)
-    Configure o arquivo de configuração do Flask (app/__init__.py) com a URI do banco, por exemplo:
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://usuario:senha@localhost/tasks_db'
+### 2. Configure o Ambiente Virtual
 
-Inicialize o banco de dados:
+Recomendado para isolar as dependências do projeto.
 
-    cd task-manager
-    python create_db.py
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
 
-Como usar
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
 
-    Execute a aplicação:
-    flask run
-    acesse o ip.
+```
 
-Cadastre um usuário, faça login e comece a criar, editar, concluir ou remover suas tarefas.
+### 3. Instale as Dependências
+```bash
+pip install -r requirements.txt
+```
+### 4. Configuração do Banco de Dados (.env)
 
-Contribuição
+Este projeto utiliza variáveis de ambiente para segurança.
 
-Contribuições são bem-vindas!
-Esse é meu primeiro projeto de larga escala, a junção de diversas bibliotecas, funções e arquivos foram um desafio e tanto, mas persistência é tudo.
-Faça um fork do projeto, crie sua branch, faça as alterações e envie um pull request.
+```bash
+Crie um banco de dados no seu MySQL (ex: tasks_db).
 
-Linkedin: https://www.linkedin.com/in/maiconmaciel
+Crie um arquivo chamado .env na raiz do projeto.
+
+Adicione a string de conexão seguindo o modelo:
+
+# Exemplo de arquivo .env
+DATABASE_URI=mysql+pymysql://seu_usuario:sua_senha@localhost/tasks_db
+SECRET_KEY=uma_chave_secreta_muito_segura
+```
+### 5. Inicialize o Banco de Dados
+Execute o script para criar as tabelas definidas nos Models.
+
+```bash
+
+python create_db.py
+
+```
+### 6. Execute a Aplicação
+```bash
+flask run
+Acesse no seu navegador: http://127.0.0.1:5000
+```
+
+### Funcionalidades
+    [x] Autenticação: Cadastro e Login de usuários (senhas hashadas).
+
+    [x] Dashboard Pessoal: Cada usuário vê apenas suas próprias tarefas.
+
+    [x] CRUD Completo: Criar, Ler, Atualizar e Deletar tarefas.
+
+    [x] Status Dinâmico: Marcar tarefas como concluídas/pendentes sem recarregar a página.
+
+    [x] Design Responsivo: Adaptável para mobile e desktop.
+
+### Aprendizados e Desafios
+Este projeto marca uma etapa importante no meu desenvolvimento como desenvolvedor Fullstack. O maior desafio foi orquestrar a comunicação entre o Fetch API no cliente e as rotas do Flask no servidor, garantindo que o estado da aplicação se mantivesse consistente no banco de dados MySQL.
+
+A estrutura de pastas foi pensada para simular um ambiente de produção real, separando models, routes, templates e static files.
+
+### Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar Pull Requests.

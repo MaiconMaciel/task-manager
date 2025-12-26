@@ -1,33 +1,50 @@
-# Byte-compiled / optimized / DLL files
+# --- Python & Bytecode ---
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
-# Environments
-.env
-.venv
+# --- Ambientes Virtuais (Várias convenções) ---
 env/
 venv/
-ENV/
-env.bak/
-venv.bak/
+.venv/
+.env/
 
-# IDE
+# --- Variáveis de Ambiente e Segredos ---
+# Bloqueia qualquer arquivo que comece com .env (ex: .env.local, .env.production)
+.env*
+# ! LIBERA especificamente o arquivo de exemplo para subir no GitHub
+!.env.example
+
+# --- Flask ---
+instance/
+.webassets-cache
+
+# --- Banco de Dados (Arquivos locais) ---
+*.db
+*.sqlite3
+*.sqlite
+
+# --- IDEs e Editores ---
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-
-# Logs
+# --- Logs e Monitoramento ---
 *.log
 logs/
 
-# Flask instance folder
-instance/
+# --- Arquivos de Sistema Operacional (Junk files) ---
+.DS_Store
+Thumbs.db
 
-# Python cache
-__pycache__/
-*.pyc
+# --- Distribuição e Builds (Caso gere executáveis futuramente) ---
+build/
+dist/
+*.egg-info/
+
+# --- Testes (Caso adicione Pytest no futuro) ---
+.pytest_cache/
+.coverage
+htmlcov/
